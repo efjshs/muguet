@@ -1,6 +1,22 @@
-- name: Build Project with xcodebuild
+name: Build iOS IPA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+
+      - name: Build Project with xcodebuild
         run: |
-          # Proje veya workspace dosyasını otomatik olarak bul
+          # Proje veya workspace dosyasını alt klasörlerde otomatik bul
           PROJECT_FILE=$(find . -maxdepth 3 -name "*.xcodeproj" | head -n 1)
           WORKSPACE_FILE=$(find . -maxdepth 3 -name "*.xcworkspace" | head -n 1)
           
@@ -32,3 +48,15 @@
             echo "Hata: Xcode proje dosyası (.xcodeproj veya .xcworkspace) bulunamadı!"
             exit 1
           fi
+
+      - name: Package to IPA
+        run: |
+          mkdir -p Payload
+          mv build/*.app Payload/ 2>/dev/null || mv build/*/*.app Payload/
+          zip -r GTA5-iOS.ipa Payload
+
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GTA5-iOS-IPA
+          path: GTA5-iOS.ipa
