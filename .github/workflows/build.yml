@@ -27,14 +27,8 @@ jobs:
         with:
           xcode-version: latest
 
-      - name: Run iOS Build Script
-        env:
-          TEAM: "0123456789"
+      - name: Read make-ios.sh Script
         run: |
           cd muguet-0.1
-          echo "Rust iOS hedefi ekleniyor..."
-          rustup target add aarch64-apple-ios
-          echo "Derleme betikleri çalıştırılabilir yapılıyor..."
-          chmod +x make-ios.sh make-app.sh
-          echo "iOS derlemesi başlatılıyor..."
-          ./make-ios.sh
+          echo "=== make-ios.sh İÇERİĞİ ==="
+          cat make-ios.sh
