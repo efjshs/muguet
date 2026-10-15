@@ -32,6 +32,8 @@ jobs:
           TEAM: "0123456789"
         run: |
           cd muguet-0.1
+          echo "Rust iOS hedefi ekleniyor..."
+          rustup target add aarch64-apple-ios
           echo "Derleme betikleri çalıştırılabilir yapılıyor..."
           chmod +x make-ios.sh make-app.sh
           echo "iOS derlemesi başlatılıyor..."
