@@ -28,6 +28,8 @@ jobs:
           xcode-version: latest
 
       - name: Run iOS Build Script
+        env:
+          TEAM: "0123456789"
         run: |
           cd muguet-0.1
           echo "Derleme betikleri çalıştırılabilir yapılıyor..."
