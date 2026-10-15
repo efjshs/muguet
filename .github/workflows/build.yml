@@ -27,8 +27,10 @@ jobs:
         with:
           xcode-version: latest
 
-      - name: Check Project Structure
+      - name: Run iOS Build Script
         run: |
           cd muguet-0.1
-          echo "Proje klasörünün içindekiler:"
-          ls -la
+          echo "Derleme betikleri çalıştırılabilir yapılıyor..."
+          chmod +x make-ios.sh make-app.sh
+          echo "iOS derlemesi başlatılıyor..."
+          ./make-ios.sh
