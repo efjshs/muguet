@@ -28,6 +28,11 @@ jobs:
         with:
           xcode-version: latest
 
+      - name: Install xcodegen
+        run: |
+          echo "xcodegen kuruluyor..."
+          brew install xcodegen
+
       - name: Run iOS Build Script
         env:
           TEAM: "0123456789"
